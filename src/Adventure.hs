@@ -21,7 +21,6 @@ module Adventure
 
 import Data.Aeson
 import qualified Data.ByteString.Lazy as B
-import qualified Data.ByteString.Lazy.Char8 as BC
 import GHC.Generics
 
 {- |The type of room identifiers. -}
@@ -56,7 +55,7 @@ data Adventure = Adventure { rooms :: [Room]
 instance FromJSON Adventure
 instance ToJSON Adventure
 
-from_json :: BC.ByteString -> Maybe T
+from_json :: B.ByteString -> Maybe T
 from_json json = do
   adv <- decode json
   return $ T adv

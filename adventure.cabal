@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 41466a52b46b0892ba163936b12abf51960ea296ba1a880fede43cb8ba90ed6a
+-- hash: a770fe599cdfbbfa4913b3c42cb08eedcda5c39e60956ada752875ad3c2815b8
 
 name:           adventure
 version:        0.1.0.0
@@ -28,6 +28,7 @@ source-repository head
 library
   exposed-modules:
       Adventure
+      Command
   other-modules:
       Paths_adventure
   hs-source-dirs:
@@ -36,6 +37,7 @@ library
       aeson
     , base >=4.7 && <5
     , bytestring
+    , split
   default-language: Haskell2010
 
 executable adventure-exe
@@ -50,6 +52,7 @@ executable adventure-exe
     , aeson
     , base >=4.7 && <5
     , bytestring
+    , split
   default-language: Haskell2010
 
 test-suite adventure-test
@@ -65,4 +68,5 @@ test-suite adventure-test
     , aeson
     , base >=4.7 && <5
     , bytestring
+    , split
   default-language: Haskell2010

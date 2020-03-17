@@ -1,10 +1,11 @@
+{- |The main entry poit for the game interface. -}
 module Main where
 
-import Data.Aeson
 import qualified Data.ByteString.Lazy as B
-import qualified Data.ByteString.Lazy.Char8 as BC
 
 import qualified Adventure as Adv
+import qualified Command as Cmd
+import qualified State as St
 
 main :: IO ()
 main = do
