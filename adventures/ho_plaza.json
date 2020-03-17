@@ -1,0 +1,85 @@
+{
+  "rooms": [
+    {
+      "roomId": "ho plaza",
+      "description": "You are on Ho Plaza. Cornell Health is to the southwest. The chimes are playing a concert in the clock tower. Someone tries to hand you a quartercard, but you avoroomId them.",
+      "exits":
+      [
+        {
+          "name": "southwest",
+          "destination": "health"
+        },
+        {
+          "name": "south west",
+          "destination": "health"
+        },
+        {
+          "name": "Cornell Health",
+          "destination": "health"
+        },
+        {
+          "name": "Gannett",
+          "destination": "health"
+        },
+        {
+          "name": "chimes",
+          "destination": "tower"
+        },
+        {
+          "name": "concert",
+          "destination": "tower"
+        },
+        {
+          "name": "clock tower",
+          "destination": "tower"
+        }
+      ]
+    },
+    {
+      "roomId": "health",
+      "description": "You are at the entrance to Cornell Health. A sign advertises free flu shots. You briefly wonder how long it would take to get an appointment. Ho Plaza is to the northeast.",
+      "exits": [
+        {
+          "name": "northeast",
+          "destination": "ho plaza"
+        },
+        {
+          "name": "north east",
+          "destination": "ho plaza"
+        },
+        {
+          "name": "Ho Plaza",
+          "destination": "ho plaza"
+        }
+      ]
+    },
+    {
+      "roomId": "tower",
+      "description": "You climbed up all 161 steps to the top of McGraw Tower. A Chimesmaster is playing the Jennie McGraw Rag. You feel inspired to ascend higher.",
+      "exits": [
+        {
+          "name": "down",
+          "destination": "ho plaza"
+        },
+        {
+          "name": "back",
+          "destination": "ho plaza"
+        },
+        {
+          "name": "Ho Plaza",
+          "destination": "ho plaza"
+        },
+        {
+          "name": "higher",
+          "destination": "nirvana"
+        }
+      ]
+    },
+    {
+      "roomId": "nirvana",
+      "description": "You have reached a higher level of existence.  There are no more words.",
+      "exits": []
+    }
+  ],
+  "startRoom": "ho plaza"
+}
