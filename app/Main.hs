@@ -11,23 +11,23 @@ import qualified Adventure as Adv
 import qualified Command as Cmd
 import qualified State as St
 
-quit' :: Adv.T -> St.T -> IO ()
-quit' _ _ = return ()
+quit :: Adv.T -> St.T -> IO ()
+quit _ _ = return ()
 
-go' :: Adv.ExitName -> Adv.T -> St.T -> IO ()
-go' exit adv st = case St.go exit adv st of
+go :: Adv.ExitName -> Adv.T -> St.T -> IO ()
+go exit adv st = case St.go exit adv st of
   Nothing -> do
     putStrLn "You can't go that way."
     main_loop adv st
   Just st -> main_loop adv st
 
-empty' :: Adv.T -> St.T -> IO ()
-empty' adv st = do
+empty :: Adv.T -> St.T -> IO ()
+empty adv st = do
   putStrLn "What?"
   main_loop adv st
 
-malformed' :: Adv.T -> St.T -> IO ()
-malformed' adv st = do
+malformed :: Adv.T -> St.T -> IO ()
+malformed adv st = do
   putStrLn "I don't understand."
   main_loop adv st
 
@@ -41,10 +41,10 @@ main_loop adv st = do
   hFlush stdout
   input <- getLine
   ( case Cmd.parse input of
-    Cmd.Quit      -> quit'
-    Cmd.Go e      -> go' $ concat $ intersperse " " e
-    Cmd.Empty     -> empty'
-    Cmd.Malformed -> malformed'
+    Cmd.Quit      -> quit
+    Cmd.Go e      -> go $ concat $ intersperse " " e
+    Cmd.Empty     -> empty
+    Cmd.Malformed -> malformed
     ) adv st
 
 main :: IO ()
