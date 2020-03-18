@@ -33,7 +33,8 @@
           "name": "clock tower",
           "destination": "tower"
         }
-      ]
+      ],
+      "value": 1
     },
     {
       "roomId": "health",
@@ -51,7 +52,8 @@
           "name": "Ho Plaza",
           "destination": "ho plaza"
         }
-      ]
+      ],
+      "value": 2
     },
     {
       "roomId": "tower",
@@ -73,12 +75,14 @@
           "name": "higher",
           "destination": "nirvana"
         }
-      ]
+      ],
+      "value": 4
     },
     {
       "roomId": "nirvana",
       "description": "You have reached a higher level of existence.  There are no more words.",
-      "exits": []
+      "exits": [],
+      "value": 128
     }
   ],
   "startRoom": "ho plaza"

@@ -21,6 +21,12 @@ go exit adv st = case St.go exit adv st of
     main_loop adv st
   Just st -> main_loop adv st
 
+score :: Adv.T -> St.T -> IO ()
+score adv st = do
+  putStr "Score: "
+  putStrLn $ show $ St.get_score st
+  main_loop adv st
+
 empty :: Adv.T -> St.T -> IO ()
 empty adv st = do
   putStrLn "What?"
@@ -43,6 +49,7 @@ main_loop adv st = do
   ( case Cmd.parse input of
     Cmd.Quit      -> quit
     Cmd.Go e      -> go $ concat $ intersperse " " e
+    Cmd.Score     -> score
     Cmd.Empty     -> empty
     Cmd.Malformed -> malformed
     ) adv st
@@ -58,6 +65,8 @@ main = catch (
     fileName <- getLine
     json <- B.readFile $ "adventures/" ++ fileName ++ ".json"
     case Adv.from_json json of
-      Nothing -> return ()
-      Just adv -> main_loop adv $ St.init_state adv
+      Nothing -> putStrLn "Failed to parse JSON."
+      Just adv -> case St.init_state adv of
+        Nothing -> putStrLn "Failed to initialize state."
+        Just st -> main_loop adv st
   ) (\ex -> if isEOFError ex then return () else putStrLn "Invalid File")

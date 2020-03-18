@@ -9,6 +9,7 @@ module State
   , init_state
   , current_room_id
   , get_visited
+  , get_score
   , go
   ) where
 
@@ -16,6 +17,7 @@ import qualified Adventure as Adv
 
 {- |The concrete type of values representing the game state. -}
 data State = State { currentRoom :: Adv.RoomId
+                   , score :: Int
                    , visited :: [Adv.RoomId]
                    } deriving Show
 
@@ -25,11 +27,14 @@ newtype T = T State
 {- |[init_state a] is the initial state of the game when playing adventure [a].
     In that state the adventurer is currently located in the starting room,
     and they have visited only that room. -}
-init_state :: Adv.T -> T
-init_state adv = T $ State { currentRoom = room
-                           , visited = [room]
-                           } where
-                             room = Adv.start_room adv
+init_state :: Adv.T -> Maybe T
+init_state adv = do
+  let room = Adv.start_room adv
+  score <- Adv.room_value adv room
+  return $ T $ State { currentRoom = room
+            , score = score
+            , visited = [room]
+            }
 
 {- |[current_room_id st] is the identifier of the room in which the adventurer
     currently is located in state [st]. -}
@@ -41,6 +46,10 @@ current_room_id (T st) = currentRoom st
     current room location is or has ever been [rm]. -}
 get_visited :: T -> [Adv.RoomId]
 get_visited (T st) = visited st
+
+
+get_score :: T -> Int
+get_score (T st) = score st
 {- |[go exit adv st] is [r] if attempting to go through exit [exit] in state
     [st] and adventure [adv] results in [r].  If [exit] is an exit from the
     adventurer's current room, then [r] is [Legal st'], where in [st'] the
@@ -50,7 +59,9 @@ get_visited (T st) = visited st
 go :: Adv.ExitName -> Adv.T -> T -> Maybe T
 go exit adv (T st) = do
   room <- Adv.next_room adv (currentRoom st) exit
+  value <- Adv.room_value adv room
   return $ T $ State { currentRoom = room
+                     , score = score st + if elem room v then 0 else value
                      , visited = if elem room v then v else room:v
                      } where
                        v = visited st

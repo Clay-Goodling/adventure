@@ -25,6 +25,7 @@ type ObjectPhrase = [String]
     into a verb and possibly an object phrase. -}
 data Command = Go ObjectPhrase
              | Quit
+             | Score
              | Empty
              | Malformed
 
@@ -42,5 +43,6 @@ parse s = case filter (\x -> x /= "") $ splitOn " " s of
   "go":[] -> Malformed
   "go":t  -> Go t
   "quit":[] -> Quit
+  "score":[] -> Score
   [] -> Empty
   _ -> Malformed

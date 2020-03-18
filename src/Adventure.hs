@@ -17,6 +17,7 @@ module Adventure
   , get_exits
   , next_room
   , next_rooms
+  , room_value
   ) where
 
 import Data.Aeson
@@ -38,6 +39,7 @@ instance ToJSON Exit
 
 data Room = Room { roomId :: RoomId
                  , description :: String
+                 , value :: Int
                  , exits :: [Exit]
                  } deriving (Show, Generic)
 
@@ -111,3 +113,9 @@ next_rooms :: T -> RoomId -> Maybe [RoomId]
 next_rooms (T adv) room = do
   room <- get_room adv room
   return $ map destination $ exits room
+
+{- |[room_value a r] is the value of room [r] in adventure [a]. -}
+room_value :: T -> RoomId -> Maybe Int
+room_value (T adv) room = do
+  room <- get_room adv room
+  return $ value room
