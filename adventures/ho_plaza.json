@@ -2,7 +2,7 @@
   "rooms": [
     {
       "roomId": "ho plaza",
-      "description": "You are on Ho Plaza. Cornell Health is to the southwest. The chimes are playing a concert in the clock tower. Someone tries to hand you a quartercard, but you avoroomId them.",
+      "description": "You are on Ho Plaza. Cornell Health is to the southwest. The chimes are playing a concert in the clock tower. Someone tries to hand you a quartercard, but you avoid them.",
       "exits":
       [
         {

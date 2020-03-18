@@ -25,7 +25,6 @@ type ObjectPhrase = [String]
     into a verb and possibly an object phrase. -}
 data Command = Go ObjectPhrase
              | Quit
-             | Score
              | Empty
              | Malformed
 
@@ -39,7 +38,7 @@ data Command = Go ObjectPhrase
     Requires: [str] contains only alphanumeric (A-Z, a-z, 0-9) and space
     characters (only ASCII character code 32; not tabs or newlines, etc.). -}
 parse :: String -> Command
-parse s = case splitOn " " s of
+parse s = case filter (\x -> x /= "") $ splitOn " " s of
   "go":[] -> Malformed
   "go":t  -> Go t
   "quit":[] -> Quit

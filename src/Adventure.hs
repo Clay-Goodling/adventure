@@ -88,7 +88,7 @@ get_exit room exit = get_exit' (exits room) exit where
 get_description :: T -> RoomId -> Maybe String
 get_description (T adv) room = do
   room <- get_room adv room
-  return $ roomId room
+  return $ description room
 
 {- |[exits a r] is a set-like list of all exit names from room [r] in
     adventure [a]. -}
