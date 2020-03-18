@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: a770fe599cdfbbfa4913b3c42cb08eedcda5c39e60956ada752875ad3c2815b8
+-- hash: 1502a4ae59294cdf178255786ce68be9a811839268f536a78de43a0b529cbc99
 
 name:           adventure
 version:        0.1.0.0
@@ -29,6 +29,7 @@ library
   exposed-modules:
       Adventure
       Command
+      State
   other-modules:
       Paths_adventure
   hs-source-dirs:
