@@ -48,7 +48,7 @@ main_loop adv st = do
   input <- getLine
   ( case Cmd.parse input of
     Cmd.Quit      -> quit
-    Cmd.Go e      -> go $ concat $ intersperse " " e
+    Cmd.Go e      -> go $ unwords e
     Cmd.Score     -> score
     Cmd.Empty     -> empty
     Cmd.Malformed -> malformed
@@ -64,9 +64,9 @@ main = catch (
     hFlush stdout
     fileName <- getLine
     json <- B.readFile $ "adventures/" ++ fileName ++ ".json"
-    case Adv.from_json json of
-      Nothing -> putStrLn "Failed to parse JSON."
-      Just adv -> case St.init_state adv of
-        Nothing -> putStrLn "Failed to initialize state."
-        Just st -> main_loop adv st
+    maybe (putStrLn "Failed to parse JSON.")
+          (\adv -> maybe (putStrLn "Failed to initialize state.")
+                         (main_loop adv)
+                         (St.init_state adv))
+          (Adv.from_json json)
   ) (\ex -> if isEOFError ex then return () else putStrLn "Invalid File")

@@ -5,8 +5,6 @@ module Command
   , parse
   ) where
 
-import Data.List.Split
-
 {- |The type [object_phrase] represents the object phrase that can be part of a
     player command.  Each element of the list represents a word of the object
     phrase, where a {i word} is defined as a consecutive sequence of non-space
@@ -39,7 +37,7 @@ data Command = Go ObjectPhrase
     Requires: [str] contains only alphanumeric (A-Z, a-z, 0-9) and space
     characters (only ASCII character code 32; not tabs or newlines, etc.). -}
 parse :: String -> Command
-parse s = case filter (\x -> x /= "") $ splitOn " " s of
+parse s = case filter (\x -> x /= "") $ words s of
   "go":[] -> Malformed
   "go":t  -> Go t
   "quit":[] -> Quit
